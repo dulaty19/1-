@@ -1,0 +1,126 @@
+def calculate_tax():
+    name = input("Enter your name please: ")
+    while True:
+        salary_input = input("Enter your desired salary level: ")
+        if salary_input.isdigit():
+            salary = int(salary_input)
+            tax_level = salary * 0.2
+            print(f"{name}, the tax level you will pay with the salary {salary} is {tax_level}")
+            break
+        else:
+            print(f"{name}, please enter your desired salary as a digit.")
+
+def simple_calculator():
+    # Define lambda functions for arithmetic operations
+    addition = lambda x, y: x + y
+    multiplication = lambda x, y: x * y
+    division = lambda x, y: x / y
+    exponentiation = lambda x, y: x ** y
+
+    # Create a dictionary to map operation numbers to their respective lambda functions
+    operations = {
+        1: addition,
+        2: multiplication,
+        3: division,
+        4: exponentiation
+    }
+
+    # Prompt the user to choose an operation
+    print("Please choose the task you want to perform:")
+    print("1. Addition")
+    print("2. Multiplication")
+    print("3. Division")
+    print("4. Exponentiation")
+
+    try:
+        choice = int(input("Enter the operation number: "))
+
+        if choice in operations:
+            num1, num2 = map(float, input("Enter two numbers separated by a comma: ").split(','))
+            result = operations[choice](num1, num2)
+            print(f"Result: {result}")
+        else:
+            print("Invalid operation number. Please choose a valid operation.")
+    except ValueError:
+        print("Invalid input. Please enter a valid operation number and two numbers.")
+
+def generate_fibonacci_sequence():
+    try:
+        length = int(input("Please enter the length of the Fibonacci sequence: "))
+        if length <= 0:
+            print("Invalid length. Please enter a positive integer.")
+        else:
+            sequence = [1, 1]
+            for i in range(2, length):
+                next_value = sequence[-1] + sequence[-2]
+                sequence.append(next_value)
+            print(f"The Fibonacci sequence for {length} is:")
+            print(", ".join(map(str, sequence)))
+    except ValueError:
+        print("Invalid input. Please enter a valid positive integer.")
+
+def store_unique_items():
+    while True:
+        print("Please choose the task you want to perform:")
+        print("1. Enter items")
+        print("2. Exit")
+
+        choice = input("Enter your choice (1 or 2): ")
+        if choice == '1':
+            input_items = input("Please enter items separated by a comma: ")
+            items = [item.strip() for item in input_items.split(',')]
+            unique_items = set(items)
+            item_counts = {item: items.count(item) for item in items if items.count(item) > 1}
+            print("Items are saved")
+            print(f"Unique items: {unique_items}")
+            print(f"Not unique items: {tuple(item_counts.items())}")
+        elif choice == '2':
+            break
+        else:
+            print("Invalid choice. Please choose 1 or 2.")
+
+def to_do_list_manager():
+    tasks = []
+    completed_tasks = set()
+
+    while True:
+        print("Please choose the task you want to perform:")
+        print("1. Add Task")
+        print("2. View All Tasks")
+        print("3. Mark Task as Completed")
+        print("4. View All Completed Tasks")
+        print("5. Exit")
+
+        choice = input("Enter your choice (1-5): ")
+
+        if choice == '1':
+            task = input("Enter the task: ")
+            tasks.append(task)
+            print(f'The task "{task}" was added to the to-do list')
+        elif choice == '2':
+            if not tasks:
+                print("No tasks in the to-do list.")
+            else:
+                print("All Tasks:")
+                for idx, task in enumerate(tasks, 1):
+                    print(f"{idx}. {task}")
+        elif choice == '3':
+            task = input("Enter the name of the task: ")
+            if task in tasks:
+                tasks.remove(task)
+                completed_tasks.add(task)
+                print(f'The task "{task}" is marked as completed')
+            else:
+                print(f'The task "{task}" was not found in the to-do list')
+        elif choice == '4':
+            if not completed_tasks:
+                print("No completed tasks.")
+            else:
+                print("All Completed Tasks:")
+                for task in completed_tasks:
+                    print(task)
+        elif choice == '5':
+            print("Exiting the to-do list manager.")
+            break
+        else:
+            print("Invalid choice. Please choose a valid option.")
